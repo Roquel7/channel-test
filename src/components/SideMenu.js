@@ -44,19 +44,20 @@ class SideMenu extends React.Component {
                     channels
                 })
             })
+
         })
     }
 
     renderChannels() {
         return this.state.channels.map(channel => {
             return (
-                <div 
+                <a
                     key={ channel.id }
-                    className="item" 
+                    className=" item" 
                     onClick={ () => this.props.selectChannel(channel)} 
                 >
                     {channel.name}
-                </div>
+                </a>
             )
         })
     }
@@ -87,6 +88,7 @@ class SideMenu extends React.Component {
                     </div>
                 </form>
             </div>
+
         )
     }
 } 
@@ -99,5 +101,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(SideMenu)
-
-// export default SideMenu

@@ -1,4 +1,3 @@
-import Axios from 'axios'
 
 export const addMessage = (text, userId, channelId) => {
     return {
@@ -12,6 +11,18 @@ export const addMessage = (text, userId, channelId) => {
         }
     }
 }
+
+export const addChannel = (title, id) => {
+    return {
+      type: 'ADD_CHANNEL',
+      payload: {
+        message: {
+          title,
+          id
+        }
+      }
+    }
+  }
 
 export const fetchMessages = () => {
     return async (dispatch, getState) => {

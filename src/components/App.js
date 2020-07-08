@@ -27,7 +27,6 @@ const App = () => {
                 setAuth(true)
                 setUser(user)
                 setLoading(false)
-                console.log(user)
             } else {
                 setAuth(false)
                 setUser(null)

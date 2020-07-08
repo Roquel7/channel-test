@@ -12,7 +12,12 @@ class LoginPage extends React.Component {
 
     handleLogin = async (event) => {
         event.preventDefault()
-        console.log(event)
+        try {
+            let userResponse = await signInWithGoogle()
+            this.success(userResponse)
+        } catch(err) {
+            this.error(err)
+        }
     }
 
     handleSubmit = async (event) => {
@@ -51,9 +56,9 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="ui container">
                 <form className="ui form attached fluid segment" onSubmit={this.handleSubmit}>
-                    <div className="ui container">
+                    <div>
                         <div>
                             <h1>Login</h1>
                             <div className="field">
@@ -81,7 +86,7 @@ class LoginPage extends React.Component {
 
 
                         </div>
-
+                        
                         <button className="ui primary basic button " type="submit" >Login</button>
                         <button className="ui secondary basic button" type="submit" onClick={ this.handleLogin }> Login Using Google </button>
 

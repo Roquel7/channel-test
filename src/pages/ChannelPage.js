@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 //components
 import SideMenu from '../components/SideMenu'
 import DisplayChannel from '../components/DisplayChannel'
-import MessageList from '../components/MessageList'
+import { selectChannel } from '../actions'
 
 class ChannelPage extends React.Component {
+
     state = {
         selectedChannel: null
     }
@@ -28,20 +29,12 @@ class ChannelPage extends React.Component {
                 </div>
                 <div className="six wide column">
                     <DisplayChannel channel={ this.state.selectedChannel } unSelect = {this.unselectChannel} />
-                    <MessageList />
+                    {/* <MessageList /> */}
                 </div>
             </div>
         )
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        channels: state.channels,
-        selectedChannel: state.selectedChannel
-    }
-}
+export default connect(null, { selectChannel } )(ChannelPage) 
 
-export default connect(mapStateToProps)(ChannelPage) 
-
-// export default ChannelPage

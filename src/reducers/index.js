@@ -16,6 +16,17 @@ function messagesReducer( messages = [], action) {
     }
 }
 
+function channelsReducer( channels = [], action ) {
+    switch(action.type) {
+        case 'ADD_CHANNEL':
+            return channels
+        case 'DELETE_CHANNEL':
+            return channels
+        default: 
+            return channels
+    }
+}
+
 function selectedChannel(selectedChannel = null, action) {
     if (action.type === 'SELECT_CHANNEL') {
       return action.payload.id
@@ -24,5 +35,7 @@ function selectedChannel(selectedChannel = null, action) {
   }  
 
 export default combineReducers({
-    messages: messagesReducer
+    messages: messagesReducer,
+    selectedChannel: selectedChannel,
+    channels: channelsReducer
 })

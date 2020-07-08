@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-//firebase
-import { db } from '../services/firebase'
 //action
 import { selectChannel } from '../actions'
 //helper
 import { deleteChannel } from '../helpers/db'
 
+import MessageList from '../components/MessageList'
 
 
 class DisplayChannel extends React.Component {
@@ -33,6 +32,9 @@ class DisplayChannel extends React.Component {
             <div className="content">
                 <div  className="header">
                     <h3> { this.props.channel.name } </h3>
+                    <MessageList />
+
+                    
                 </div>
                 <span onClick={ this.deletingChannel } className="ui right floated raised segment">
                 <i className="  trash icon" ></i>
@@ -48,5 +50,3 @@ class DisplayChannel extends React.Component {
 }
 
 export default connect( null, { selectChannel } )(DisplayChannel)
-
-// export default DisplayChannel

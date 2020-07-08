@@ -5,36 +5,33 @@ import InputMessage from './InputMessage'
 import { addMessage, fetchMessages } from '../actions'
 import { db } from '../services/firebase'
 
+
+
 class MessageList extends React.Component {
 
-    // componentDidMount() {
-    //     db.collection('messages')
-    //         .onSnapshot(querySnapshot => {
-    //             let messages = []
-    //             querySnapshot.forEach(doc => {
-    //                 let messageObject = {
-    //                     id: doc.id,
-    //                     ...doc.data()
-    //                 }
-    //                 messages.push(messageObject)
-    //                 this.setState({
-    //                     messages
-    //                 })
-    //             })
-    //         })
-    // }
+
+    componentDidMount() {
+        db.collection('messages')
+            .onSnapshot(querySnapshot => {
+                let messagesList = []
+                querySnapshot.forEach(doc => {
+                    let messageObject = {
+                        id: doc.id,
+                        ...doc.data()
+                    }
+                    messagesList.push(messageObject)
+                    this.setState({
+                        messagesList
+                    })
+                })
+            })
+    }
 
     renderMessages() {
         return this.props.messages.map((message, key) => {
             return <div key={ key } > { message.name} </div>
         })
     }
-
-    // renderInput() {
-    //     if (this.props.selectedChannel) {
-    //         return <InputMessage submit={ this.submitMessage } />
-    //     }
-    // }
 
     renderInput() {
             return <InputMessage submit={ this.submitMessage } />
@@ -57,6 +54,7 @@ class MessageList extends React.Component {
 
 const mapStateToProps = state => {
     let messages = state.messages.filter(message => message.postId === state.selectedChannel)
+    console.log(state.messages)
     return {
         messages: messages, 
         selectedChannel: state.selectedChannel
