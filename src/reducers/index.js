@@ -34,8 +34,16 @@ function selectedChannel(selectedChannel = null, action) {
     return selectedChannel
   }  
 
+function userReducer(user = null, action) {
+    if (action.type === 'SET_USER') {
+        return action.payload.user
+    }
+    return user
+}
+
 export default combineReducers({
     messages: messagesReducer,
     selectedChannel: selectedChannel,
-    channels: channelsReducer
+    channels: channelsReducer,
+    user: userReducer
 })

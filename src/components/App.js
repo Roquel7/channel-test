@@ -4,8 +4,11 @@ import {
     Route,
     Switch 
 } from 'react-router-dom'
+import { connect } from 'react-redux'
+
 import PrivateRoute from './PrivateRoute'
 import Header from './Header'
+import { saveUserData } from '../actions'
 //helper
 import { auth } from '../services/firebase'
 //pages
@@ -16,18 +19,19 @@ import HomePage from '../pages/HomePage'
 import ChannelPage from '../pages/ChannelPage'
 import InfoPage from '../pages/InfoPage'
 
-const App = () => {
+
+const App = props => {
     let [loading, setLoading] = useState(true) 
     let [ authenticated, setAuth ] = useState(false)
     let [ user, setUser ] = useState(null)
 
-    useEffect( () => {
+    useEffect( (props) => {
         auth().onAuthStateChanged( user => {
             if (user) {
                 setAuth(true)
                 setUser(user)
                 setLoading(false)
-            } else {
+                saveUserData(user)            } else {
                 setAuth(false)
                 setUser(null)
                 setLoading(false)
@@ -57,11 +61,17 @@ const App = () => {
                         </Switch>
                     </div>
                 )}
-
-
             </div>
         </Router>
     )
 }
 
-export default App
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = { saveUserData }
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

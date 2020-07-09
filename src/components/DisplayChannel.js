@@ -7,19 +7,13 @@ import { deleteChannel } from '../helpers/db'
 
 import MessageList from '../components/MessageList'
 
-
 class DisplayChannel extends React.Component {
-    
 
     deletingChannel = () => {
         deleteChannel(this.props.channel.id)
         this.props.unSelect()
     }
 
-    state = {
-        messages: [],        
-        newMessage: ''
-    }
 
     handleChange = (event) => {
         this.setState({
@@ -34,9 +28,8 @@ class DisplayChannel extends React.Component {
                     <h3> { this.props.channel.name } </h3>
                     <MessageList />
 
-                    
                 </div>
-                <span onClick={ this.deletingChannel } className="ui right floated raised segment">
+                <span onClick={ this.deletingChannel } className="ui small right floated raised segment">
                 <i className="  trash icon" ></i>
                 </span>
             </div>

@@ -3,29 +3,8 @@ import { connect } from 'react-redux'
 
 import InputMessage from './InputMessage'
 import { addMessage, fetchMessages } from '../actions'
-import { db } from '../services/firebase'
-
-
 
 class MessageList extends React.Component {
-
-
-    componentDidMount() {
-        db.collection('messages')
-            .onSnapshot(querySnapshot => {
-                let messagesList = []
-                querySnapshot.forEach(doc => {
-                    let messageObject = {
-                        id: doc.id,
-                        ...doc.data()
-                    }
-                    messagesList.push(messageObject)
-                    this.setState({
-                        messagesList
-                    })
-                })
-            })
-    }
 
     renderMessages() {
         return this.props.messages.map((message, key) => {

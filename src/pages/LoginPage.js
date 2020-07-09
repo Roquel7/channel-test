@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 import { signin, signInWithGoogle } from '../helpers/auth'
+import { addNewUser } from '../helpers/db'
+
 
 class LoginPage extends React.Component {
     state = {
@@ -31,7 +33,11 @@ class LoginPage extends React.Component {
         }
     }
 
-    success() {
+    success({ user, additionalUserInfo }) {
+        if (additionalUserInfo && additionalUserInfo.isNewUser) {
+            addNewUser(user)
+        }
+        console.log(' ', user)
         let { state } = this.props.location
         if (state && state.from) {
             this.props.history.push(state.from.pathname)
